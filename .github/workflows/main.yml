@@ -55,7 +55,10 @@ jobs:
 
     - name: Build libeudev-dev
       run: |
+        cp android_eudev.patch libeudev-dev/
         cd libeudev-dev
+        git apply --check android_eudev.patch
+        git apply android_eudev.patch
         
         export NDK_TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin
         export TARGET=${{ steps.vars.outputs.target }}
